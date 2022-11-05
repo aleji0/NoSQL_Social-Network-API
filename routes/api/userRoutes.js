@@ -1,10 +1,13 @@
 const router = require('express').Router();
+
 const {
-  getCourses,
-  getSingleCourse,
-  createCourse,
-  updateCourse,
-  deleteCourse,
+  getUser,
+  getSingleUser,
+  createUser,
+  updateUser,
+  deleteUser,
+  addFriend
+  deleteFriend
 } = require('../../controllers/userController.js');
 
 // /api/courses

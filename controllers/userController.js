@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models');
 
 module.exports = {
-  // Get all courses
+
   getThoughts(req, res) {
     Thought.find()
       .sort({ createdAt: -1 })
