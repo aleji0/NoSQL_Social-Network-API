@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const userSchema = require('./User');
 
 // Schema to create Student model
 const userSchema = new Schema(
@@ -7,7 +6,7 @@ const userSchema = new Schema(
     userName: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
       trim: true,
     },
     email: {
@@ -18,14 +17,14 @@ const userSchema = new Schema(
     },
     thoughts: [
       {
-      type: Schema.types.objectId, 
+      type: Schema.types.ObjectId, 
       ref: 'Thought'
     },
     ],
     friends: [
       {
-        type: Schema.types.objectId, 
-        ref:'User',
+       type: Schema.types.ObjectId, 
+       ref:'User',
       },
     ],
   },
