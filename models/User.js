@@ -1,45 +1,45 @@
+// Require Mongoose
 const { Schema, model } = require('mongoose');
 
-// Schema to create Student model
-const userSchema = new Schema(
-  {
-    userName: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
+const UsersSchema = new Schema(
+    {
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
     },
     email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: [/.+@.+\..+/, 'Must be a valid email address']
+        type: String,
+        required: true,
+        unique: true,
+        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/]
     },
-    thoughts: [
-      {
-      type: Schema.types.ObjectId, 
-      ref: 'Thought'
+    thoughts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Thoughts'
+    }],
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Users'
+    }]
     },
-    ],
-    friends: [
-      {
-       type: Schema.types.ObjectId, 
-       ref:'User',
-      },
-    ],
-  },
-  {
+    {
     toJSON: {
-      virtuals: true,
+        virtuals: true,
+        getters: true,
     },
-    id: false,
-  }
+    id: false
+    }
 );
 
-userSchema.virtual('friendCount').get(function () {
-  return this.friends.length;
-});
+// get total count of friends
+UsersSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+})
 
-const User = model('User', userSchema);
+// create the Users model using the Users Schema
+const Users = model('Users', UsersSchema);
 
-module.exports = User;
+// Export Users module
+module.exports = Users;
