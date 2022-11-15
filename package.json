@@ -1,26 +1,21 @@
 {
-  "name": "social-network-api",
+  "name": "nosql_social-network-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jpd61/social-network-api.git"
+    "url": "git+https://github.com/aleji0/NoSQL_Social-Network-API.git"
   },
-  "author": "Joseph DeWoody",
-  "license": "ISC",
+  "author": "Alex Springer",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jpd61/social-network-api/issues"
+    "url": "https://github.com/aleji0/NoSQL_Social-Network-API/issues"
   },
-  "homepage": "https://github.com/jpd61/social-network-api#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "moment": "^2.27.0",
-    "mongoose": "^5.9.23",
-    "nodemon": "^2.0.4"
-  }
+  "homepage": "https://github.com/aleji0/NoSQL_Social-Network-API#readme"
 }
