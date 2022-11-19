@@ -31,7 +31,7 @@ const thoughtController = {
             })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'Incorrect thought data!' });
+                    res.status(404).json({ message: 'Invalid data' });
                     return;
                 }
                 res.json(dbPizzaData);
@@ -42,7 +42,7 @@ const thoughtController = {
         Thoughts.findByIdAndUpdate({ _id: params.thoughtId }, body, { runValidators: true, new: true })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'No user found with this ID!' });
+                    res.status(404).json({ message: 'There is no user with this ID' });
                     return;
                 }
                 res.json(dbPizzaData);
@@ -53,7 +53,7 @@ const thoughtController = {
         Thoughts.findByIdAndDelete({ _id: params.thoughtId }, { runValidators: true, new: true })
             .then(thoughtData => {
                 if (!thoughtData) {
-                    res.status(404).json({ message: 'No user found with this ID!' });
+                    res.status(404).json({ message: 'There is no user with this ID' });
                     return;
                 }
                 res.json(dbPizzaData);
@@ -68,7 +68,7 @@ const thoughtController = {
         )
         .then(thoughtData => {
             if (!thoughtData) {
-                res.status(404).json({ message: 'Incorrect reaction data!' });
+                res.status(404).json({ message: 'Invalid reaction data' });
                 return;
             }
             res.json(dbPizzaData);
@@ -83,7 +83,7 @@ const thoughtController = {
         )
         .then(thoughtData => {
             if (!thoughtData) {
-                res.status(404).json({ message: 'Incorrect reaction data!' });
+                res.status(404).json({ message: 'Invalid reaction data' });
                 return;
             }
             res.json(dbPizzaData);

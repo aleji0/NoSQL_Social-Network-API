@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -17,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/aleji0/NoSQL_Social-Network-API/issues"
   },
-  "homepage": "https://github.com/aleji0/NoSQL_Social-Network-API#readme"
+  "homepage": "https://github.com/aleji0/NoSQL_Social-Network-API#readme",
+  "dependencies": {
+    "mongoose": "^6.7.2"
+  }
 }
