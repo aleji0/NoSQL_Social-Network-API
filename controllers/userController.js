@@ -36,7 +36,7 @@ const userController = {
         // return if no user is found 
         .then(dbUsersData => {
             if(!dbUsersData) {
-                res.status(404).json({message: 'No users with this ID'});
+                res.status(404).json({message: 'There is no user with this ID'});
                 return; 
             }
             res.json(dbUsersData)
@@ -52,7 +52,7 @@ const userController = {
         Users.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
         .then(dbUsersData => {
             if(!dbUsersData) {
-                res.status(404).json({message: 'No users with this ID'});
+                res.status(404).json({message: 'There is no user with this ID'});
                 return;
             }
             res.json(dbUserData);
@@ -64,7 +64,7 @@ const userController = {
         Users.findOneAndDelete({_id: params.id})
         .then(dbUsersData => {
             if(!dbUsersData) {
-                res.status(404).json({message: 'No user with this ID'});
+                res.status(404).json({message: 'There is no user with this ID'});
                 return;
             }
             res.json(dbUsersData);
@@ -72,14 +72,14 @@ const userController = {
         .catch(err => res.status(400).json(err));
     },
 
-    // Delete a current user by ID
+    // Add a new friend
     addFriend({params}, res) {
         Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: ('-__v')})
         .select('-__v')
         .then(dbUsersData => {
             if (!dbUsersData) {
-                res.status(404).json({message: 'No user with this ID'});
+                res.status(404).json({message: 'There is no user with this ID'});
                 return;
             }
         res.json(dbUsersData);
@@ -87,14 +87,14 @@ const userController = {
         .catch(err => res.json(err));
     },
 
-    // Delete a current Friend
+    // Delete a current friend
     deleteFriend({ params }, res) {
         Users.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: '-__v'})
         .select('-__v')
         .then(dbUsersData => {
             if(!dbUsersData) {
-                res.status(404).json({message: 'No user with this ID'});
+                res.status(404).json({message: 'There is no user with this ID'});
                 return;
             }
             res.json(dbUsersData);
