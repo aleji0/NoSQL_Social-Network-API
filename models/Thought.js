@@ -1,10 +1,10 @@
-// Require Mongoos and Moment
+// requires mongoose and moment
 const { Schema, model, Types } = require('mongoose');
 const moment = require('moment');
 
 const ReactionSchema = new Schema(
     {
-    // Set custom ID 
+    
     reactionId: {
         type: Schema.Types.ObjectId,
         default: ()=> new Types.ObjectId()
@@ -31,7 +31,6 @@ const ReactionSchema = new Schema(
     }
 );
 
-
 const ThoughtsSchema = new Schema(
     {
     thoughtText: {
@@ -50,7 +49,7 @@ const ThoughtsSchema = new Schema(
         type: String,
         required: true
     },
-    // Use ReactionsSchema to validate data
+    
     reactions: [ReactionSchema]
     },
     {
@@ -67,8 +66,7 @@ ThoughtsSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
-// create the Thoughts model using the Thoughts Schema
+// create the Thoughts model
 const Thoughts = model('Thoughts', ThoughtsSchema);
 
-// Export Thoughts Module
 module.exports = Thoughts;

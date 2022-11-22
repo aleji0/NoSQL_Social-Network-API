@@ -1,4 +1,4 @@
-// Require Users and Thoughts Models
+// require models
 const Thoughts = require('./Thought');
 const Users = require('./User');
 

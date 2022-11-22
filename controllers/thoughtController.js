@@ -1,9 +1,10 @@
-// Require Thoughts and Users Models
+// require User and Thoughts models
 const {Thoughts, Users} = require('../models');
 
-// Set up Thoughts Controller
+// Thoughts controller
 const thoughtController = {
 
+    // get all thoughts
     getThoughts(req, res) {
         Thoughts.find({})
             .then(thoughtData => res.json(thoughtData))
@@ -12,6 +13,7 @@ const thoughtController = {
                 res.status(400).json(err);
             });
     },
+    // get thought by ID
     getThoughtById({ params }, res) {
         Thoughts.findOne({ _id: params.thoughtId })
             .then(thoughtData => res.json(thoughtData))
@@ -20,6 +22,7 @@ const thoughtController = {
                 res.status(400).json(err);
             });
     },
+    // create new thought
     addThought({ params, body }, res) {
         Thoughts.create(body)
             .then(({ _id }) => {
@@ -38,6 +41,8 @@ const thoughtController = {
             })
             .catch(err => res.json(err));
     },
+    
+    // update thought
     updateThought({ params, body }, res) {
         Thoughts.findByIdAndUpdate({ _id: params.thoughtId }, body, { runValidators: true, new: true })
             .then(thoughtData => {
@@ -49,6 +54,7 @@ const thoughtController = {
             })
             .catch(err => res.json(err));
     },
+    // delete thought
     deleteThought({ params }, res) {
         Thoughts.findByIdAndDelete({ _id: params.thoughtId }, { runValidators: true, new: true })
             .then(thoughtData => {
@@ -61,7 +67,7 @@ const thoughtController = {
             .catch(err => res.json(err));
     },
 
-
+    // create reaction
     addReaction({params, body}, res){
         Thoughts.findOneAndUpdate(
             {_id: params.thoughtId},
@@ -77,6 +83,8 @@ const thoughtController = {
         })
         .catch(err => res.json(err));
     },
+
+    // delete reaction
     deleteReaction({params}, res){
         Thoughts.findOneAndUpdate(
             {_id: params.thoughtId},
@@ -94,5 +102,4 @@ const thoughtController = {
     }
 }
     
-// Export module thought controller
 module.exports = thoughtController;

@@ -1,17 +1,17 @@
-// Require Users Model
+// require User model
 const {Users} = require('../models');
 
-// Set up Users Controller
+// Users controller
 const userController = {
     
-    // Create a new User
+    // create new user
     createUser({body}, res) {
         Users.create(body)
         .then(dbUsersData => res.json(dbUsersData))
         .catch(err => res.status(400).json(err));
     },
 
-    // Get All Users
+    // get all users
     getUsers(req, res) {
         Users.find({})
         // populate users thoughts
@@ -27,13 +27,12 @@ const userController = {
         });
     },
 
-    // Get single user by ID
+    // get user by ID
     getUserById({params}, res) {
         Users.findOne({_id: params.id })
         .populate({path: 'thoughts', select: '-__v'})
         .populate({path: 'friends', select: '-__v'})
         .select('-__v')
-        // return if no user is found 
         .then(dbUsersData => {
             if(!dbUsersData) {
                 res.status(404).json({message: 'There is no user with this ID'});
@@ -47,7 +46,7 @@ const userController = {
         })
     },
 
-    // Update a current User by ID
+    // update user by ID
     updateUser({params, body}, res) {
         Users.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
         .then(dbUsersData => {
@@ -72,7 +71,7 @@ const userController = {
         .catch(err => res.status(400).json(err));
     },
 
-    // Add a new friend
+    // add friend
     addFriend({params}, res) {
         Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: ('-__v')})
@@ -87,7 +86,7 @@ const userController = {
         .catch(err => res.json(err));
     },
 
-    // Delete a current friend
+    // delete friend
     deleteFriend({ params }, res) {
         Users.findOneAndUpdate({_id: params.id}, {$pull: { friends: params.friendId}}, {new: true})
         .populate({path: 'friends', select: '-__v'})
@@ -104,5 +103,4 @@ const userController = {
 
 };
 
-// Export module users controller
 module.exports = userController; 
